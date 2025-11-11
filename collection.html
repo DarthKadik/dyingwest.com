@@ -22,6 +22,13 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             animation: fadeIn 1.5s ease-in-out;
+            text-align: center;
+            padding: 0 20px;
+        }
+        @media (max-width: 600px) {
+            body {
+                font-size: 18px;
+            }
         }
         @keyframes fadeIn {
             from {
@@ -31,9 +38,24 @@
                 opacity: 1;
             }
         }
+        .back-link {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            text-decoration: none;
+            color: #000;
+            font-size: 16px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+        .back-link:hover {
+            color: #888;
+        }
     </style>
 </head>
 <body>
+    <a href="index.html" class="back-link">&larr; Back</a>
     <p>Out of stock. Expected restock on nov 12.</p>
 </body>
 </html>
