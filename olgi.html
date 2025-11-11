@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Collection</title>
+    <title>Echo by dyingwest</title>
     <style>
         html, body {
             height: 100%;
@@ -11,32 +11,89 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        }
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
             background-color: #ffffff;
             color: #000;
-            font-size: 24px;
+            overflow: hidden;
+        }
+        body {
+            animation: fadeIn 1s ease-in-out;
+        }
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: 40px;
+            max-width: 1200px;
+            margin: auto;
+        }
+        .product-image {
+            flex: 0 0 37%;
+            padding-right: 40px;
+        }
+        .product-image img {
+            width: 100%;
+            height: auto;
+            max-height: 80vh;
+            object-fit: contain;
+        }
+        .product-details {
+            flex: 0 0 40%;
+        }
+        h1 {
+            font-size: 28px;
             text-transform: uppercase;
             letter-spacing: 2px;
-            animation: fadeIn 1.5s ease-in-out;
-            text-align: center;
-            padding: 0 20px;
+            margin-top: 0;
         }
-        @media (max-width: 600px) {
-            body {
-                font-size: 18px;
-            }
+        .price {
+            font-size: 22px;
+            margin: 20px 0;
         }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+        .description {
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        .size-selector label {
+            display: block;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+        .size-selector select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #000;
+            background: #fff;
+            font-size: 16px;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2212%22%20height%3D%228%22%20viewBox%3D%220%200%2012%208%22%20fill%3D%22none%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M1%201.5L6%206.5L11%201.5%22%20stroke%3D%22black%22%20stroke-width%3D%222%22/%3E%3C/svg%3E');
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+        }
+        .buy-button {
+            width: 100%;
+            padding: 15px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            text-transform: uppercase;
+            font-size: 16px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+        .buy-button:disabled {
+            background-color: #888;
+            cursor: not-allowed;
+        }
+        .stock-info {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #555;
         }
         .back-link {
             position: absolute;
@@ -47,15 +104,81 @@
             font-size: 16px;
             letter-spacing: 1px;
             text-transform: uppercase;
-            transition: color 0.3s ease;
+            z-index: 10;
         }
         .back-link:hover {
             color: #888;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @media (max-width: 768px) {
+            html, body {
+                overflow-y: auto;
+                height: auto;
+            }
+            .container {
+                flex-direction: column;
+                /* text-align: center; */
+                padding: 80px 20px 20px;
+                height: auto;
+            }
+            .product-image {
+                padding-right: 0;
+                margin-bottom: 20px;
+                flex-basis: auto;
+            }
+            .product-details {
+                flex-basis: auto;
+                text-align: left;
+            }
+            .product-image img {
+                max-height: 50vh;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            .price {
+                font-size: 20px;
+            }
         }
     </style>
 </head>
 <body>
     <a href="index.html" class="back-link">&larr; Back</a>
-    <p>Out of stock. Expected restock on nov 12.</p>
+    <div class="container">
+        <div class="product-image">
+            <img src="olgasweater.png" alt="Olga Sweater">
+        </div>
+        <div class="product-details">
+            <h1>Echo Sweater</h1>
+            <p class="price">€66.60</p>
+            <p class="description">Screaming in an echochamber. It's called coping, look it up. <br> The relaxed fit and classic design of this piece make it a versatile addition to any selfvalidating wardrobe.</p>
+            <div class="size-selector">
+                <label for="size">Size</label>
+                <select id="size" name="size">
+                    <option value="s">Small</option>
+                    <option value="m">Medium</option>
+                    <option value="l">Large</option>
+                </select>
+            </div>
+            <button class="buy-button" disabled>Buy Now</button>
+            <p class="stock-info">Out of stock. Expected restock in mid-november.</p>
+        </div>
+    </div>
+    <script>
+        // On mobile on clicked, short show of a confirm.
+        const buyButton = document.querySelector('.buy-button');
+        buyButton.addEventListener('click', function() {
+            const originalText = this.textContent;
+            if (window.innerWidth <= 768) {
+                this.textContent = 'Added to cart';
+                setTimeout(() => {
+                    this.textContent = originalText;
+                }, 2000);
+            }
+        });
+    </script>
 </body>
 </html>
