@@ -11,6 +11,10 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            transition: opacity 0.5s ease-in-out;
+        }
+        body.fade-out {
+            opacity: 0;
         }
         body {
             display: flex;
@@ -25,15 +29,6 @@
             max-width: 574px;
             height: auto;
             margin-bottom: 40px; /* Add some space between logo and nav */
-            cursor: pointer;
-        }
-        svg path {
-            transition: transform 1s ease-in-out, opacity 1s ease-in-out;
-            transform-origin: center;
-        }
-        svg.opening path {
-            transform: scaleX(2);
-            opacity: 0;
         }
         nav ul {
             list-style: none;
@@ -109,23 +104,25 @@
     <nav>
         <ul>
             <li><a href="collection.html">Shop the echo chamber collection</a></li>
+            <li><a href="collection.html">shop the better than greta collection</a></li>
+            <li><a href="collection.html">shop the gender collection</a></li>
         </ul>
     </nav>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const navLinks = document.querySelectorAll('nav a');
-            const svg = document.querySelector('svg');
+            const body = document.body;
 
             navLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
                     const destination = this.href;
 
-                    svg.classList.add('opening');
+                    body.classList.add('fade-out');
 
                     setTimeout(() => {
                         window.location.href = destination;
-                    }, 100); // Matches the transition duration
+                    }, 500); // Matches the transition duration
                 });
             });
         });
